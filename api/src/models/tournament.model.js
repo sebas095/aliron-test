@@ -1,10 +1,24 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
+const { StatusHelper } = require("../helpers");
+
+const tournamentStatus = {
+  values: ["IN_PROGRESS", "FINISHED"],
+  message: "{VALUE} is not a valid status",
+};
+
 const TournamentSchema = new Schema(
   {
-    stages: [{ type: Schema.Types.ObjectId }],
+    stages: [{ type: Schema.Types.ObjectId, ref: "Stage" }],
     playersNumber: { type: Number, required: true, default: 8 },
+    status: {
+      type: String,
+      required: true,
+      default: StatusHelper.IN_PROGRESS,
+      enum: tournamentStatus,
+    },
+    winner: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: { createdAt: true, updatedAt: true } }
 );
