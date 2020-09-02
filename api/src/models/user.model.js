@@ -3,6 +3,8 @@ const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 const uniqueValidator = require("mongoose-unique-validator");
 
+const { StatusHelper, RolesHelper } = require("../helpers");
+
 const SALT_WORK_FACTOR = 10;
 
 const userStatus = {
@@ -30,8 +32,8 @@ const UserSchema = new Schema(
       unique: true,
     },
     password: { type: String, required: [true, "Password is required"] },
-    status: { type: String, default: "ACTIVE", enum: userStatus },
-    role: { type: String, default: "PLAYER_ROLE", enum: validRoles },
+    status: { type: String, default: StatusHelper.ACTIVE, enum: userStatus },
+    role: { type: String, default: RolesHelper.PLAYER_ROLE, enum: validRoles },
   },
   { timestamps: { createdAt: true, updatedAt: true } }
 );
