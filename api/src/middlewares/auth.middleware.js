@@ -3,6 +3,7 @@ const { JWT_SECRET } = require("../config");
 
 module.exports = (req, res, next) => {
   const token = req.headers["authorization"];
+
   if (!token) {
     const error = new Error();
     error.status = 400;
@@ -10,7 +11,7 @@ module.exports = (req, res, next) => {
     throw error;
   }
 
-  jwt.verify(token, JWT_SECRET, (err, decodeToken) => {
+  jwt.verify(token.slice(7), JWT_SECRET, (err, decodeToken) => {
     if (err) {
       const error = new Error();
       error.status = 401;
