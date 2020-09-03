@@ -1,4 +1,6 @@
 const BaseService = require("./base.service");
+const { RolesHelper } = require("../helpers");
+
 let _userRepository = null;
 
 class UserService extends BaseService {
@@ -14,6 +16,12 @@ class UserService extends BaseService {
 
   async disableUser(id) {
     return await _userRepository.disableUser(id);
+  }
+
+  async getAll(pageSize = 20, pageNum = 1) {
+    return await this.repository.getAll(pageSize, pageNum, {
+      role: RolesHelper.PLAYER_ROLE,
+    });
   }
 }
 
