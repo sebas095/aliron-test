@@ -41,6 +41,10 @@ const UserSchema = new Schema(
 UserSchema.methods.toJSON = function () {
   const user = this.toObject();
   delete user.password;
+  delete user.status;
+  delete user.role;
+  delete user.__v;
+
   return user;
 };
 
