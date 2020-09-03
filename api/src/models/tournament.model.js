@@ -12,6 +12,7 @@ const TournamentSchema = new Schema(
   {
     stages: [{ type: Schema.Types.ObjectId, ref: "Stage" }],
     playersNumber: { type: Number, required: true, default: 8 },
+    players: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
     status: {
       type: String,
       required: true,
@@ -20,13 +21,16 @@ const TournamentSchema = new Schema(
     },
     winner: { type: Schema.Types.ObjectId, ref: "User" },
   },
-  { timestamps: { createdAt: true, updatedAt: true } }
+  {
+    timestamps: { createdAt: true, updatedAt: true },
+    toJSON: { virtuals: true },
+  }
 );
 
 // Calculate stages number in a tournament
 // Players number must be a power of 2
 TournamentSchema.virtual("stagesNumber").get(function () {
-  return Math.log2(this.playersNumber) - 1;
+  return Math.log2(this.playersNumber);
 });
 
 TournamentSchema.virtual("stagesName").get(function () {
@@ -44,6 +48,15 @@ TournamentSchema.virtual("stagesName").get(function () {
     default:
       return "";
   }
+});
+
+TournamentSchema.set("toJSON", {
+  virtuals: true,
+  transform(doc, ret) {
+    delete ret.id;
+    delete ret.__v;
+    delete ret.stagesName;
+  },
 });
 
 module.exports = mongoose.model("Tournament", TournamentSchema);
