@@ -10,6 +10,7 @@ const tournamentStatus = {
 
 const TournamentSchema = new Schema(
   {
+    name: { type: String, required: true },
     stages: [{ type: Schema.Types.ObjectId, ref: "Stage" }],
     playersNumber: { type: Number, required: true, default: 8 },
     players: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
@@ -33,29 +34,11 @@ TournamentSchema.virtual("stagesNumber").get(function () {
   return Math.log2(this.playersNumber);
 });
 
-TournamentSchema.virtual("stagesName").get(function () {
-  switch (this.stagesNumber) {
-    case 32:
-      return "Dieciseisavos De Final";
-    case 16:
-      return "Octavos De Final";
-    case 8:
-      return "Cuartos De Final";
-    case 4:
-      return "Semifinal";
-    case 2:
-      return "Final";
-    default:
-      return "";
-  }
-});
-
 TournamentSchema.set("toJSON", {
   virtuals: true,
   transform(doc, ret) {
     delete ret.id;
     delete ret.__v;
-    delete ret.stagesName;
   },
 });
 
