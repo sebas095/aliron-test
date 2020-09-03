@@ -7,12 +7,7 @@ require("express-async-errors");
 
 const { NotFoundMiddleware, ErrorMiddleware } = require("../middlewares");
 
-module.exports = ({
-  UserRoutes,
-  AuthRoutes,
-  TournamentRoutes,
-  StageRoutes,
-}) => {
+module.exports = ({ UserRoutes, AuthRoutes, TournamentRoutes }) => {
   const router = express.Router();
   const apiRoutes = express.Router();
 
@@ -24,10 +19,9 @@ module.exports = ({
     .use(logger("dev"))
     .use(compression());
 
-  // apiRoutes.use("/user", UserRoutes);
-  // apiRoutes.use("/auth", AuthRoutes);
-  // apiRoutes.use("/tournament", TournamentRoutes);
-  // apiRoutes.use("/stage", StageRoutes);
+  apiRoutes.use("/user", UserRoutes);
+  apiRoutes.use("/auth", AuthRoutes);
+  apiRoutes.use("/tournament", TournamentRoutes);
 
   router.use("/v1/api", apiRoutes);
 
