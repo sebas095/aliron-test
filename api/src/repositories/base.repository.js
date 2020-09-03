@@ -7,7 +7,11 @@ class BaseRepository {
     return await this.model.findById(id);
   }
 
-  async getAll(pageSize = 5, pageNum = 1) {
+  async getBy(filter) {
+    return await this.model.find(filter);
+  }
+
+  async getAll(pageSize = 20, pageNum = 1, filter = {}) {
     // skip - limit
     /**
      * Returns true if num is a number type positive
@@ -20,7 +24,7 @@ class BaseRepository {
     pageNum = isValid(pageNum) ? pageNum : 1;
 
     const skips = pageSize * (pageNum - 1);
-    return await this.model.find().skip(skips).limit(pageSize);
+    return await this.model.find(filter).skip(skips).limit(pageSize);
   }
 
   async create(entity) {
