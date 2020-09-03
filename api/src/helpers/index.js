@@ -3,4 +3,5 @@ module.exports = {
   StatusHelper: require("./status.helper"),
   RolesHelper: require("./roles.helper"),
   MatchmakingHelper: require("./matchmaking.helper"),
+  StageNameHelper: require("./stage-name.helper"),
 };
