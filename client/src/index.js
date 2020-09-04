@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Router, BrowserRouter } from "react-router-dom";
+
 import App from "./App";
+import { history } from "./helpers";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router history={history}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Router>,
   document.getElementById("root")
 );
 
