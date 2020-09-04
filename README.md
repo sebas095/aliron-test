@@ -5,7 +5,7 @@
 - [NodeJS](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#debian-stable)
 
-## Installation
+## Installación
 
 ### Backend
 
@@ -25,7 +25,16 @@
   yarn start
 ```
 
-- Corriendo en http://localhost:3000
+- Corriendo en http://localhost:3000/auth/signin
+
+- Se cuenta con 2 torneos creados de prueba donde uno solo fue creado y otro se termino y obtuvo un ganador, para acceder a estos dos ejemplos se debe iniciar sesión y se pueden ver:
+  - [Detalles de los torneos](http://localhost:3000/tournament)
+  - [Ir a torneo creado](http://localhost:3000/tournament/5f5234a7677def3c5b6a03f8/1)
+  - Para ir al torneo finalizado se puede ver:
+    - [Ronda 1](http://localhost:3000/tournament/5f50ad6a32e7c5082f6ffc00/1)
+    - [Ronda 2](http://localhost:3000/tournament/5f50ad6a32e7c5082f6ffc00/2)
+    - [Ronda 3](http://localhost:3000/tournament/5f50ad6a32e7c5082f6ffc00/3)
+    - [Ganador](http://localhost:3000/tournament/winner)
 
 ## API
 
