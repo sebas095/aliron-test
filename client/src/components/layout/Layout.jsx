@@ -7,7 +7,7 @@ import Footer from "./Footer";
 const Container = styled.div`
   display: grid;
   grid-template-rows: 1fr 40px;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 300px 1fr;
   grid-template-areas:
     "nav main"
     "nav footer";
