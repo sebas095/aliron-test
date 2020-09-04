@@ -136,7 +136,10 @@ class TournamentService extends BaseService {
       round: stageExist.round + 1,
     });
 
-    if (nextStage.length > 0) {
+    if (
+      nextStage.length > 0 ||
+      tournamentExist.status === StatusHelper.FINISHED
+    ) {
       const error = new Error();
       error.status = 405;
       error.message = "Action not allowed";
