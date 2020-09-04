@@ -13,6 +13,15 @@ class TournamentService extends BaseService {
   }
 
   async create(entity) {
+    const { playersNumber, players } = entity;
+
+    if (players.length !== playersNumber) {
+      const error = new Error();
+      error.status = 400;
+      error.message = `Must be ${playersNumber} players for the tournament`;
+      throw error;
+    }
+
     const tournament = await super.create(entity);
     const matchmakings = MatchmakingHelper.getRandomMatch(
       tournament.playersNumber

@@ -12,7 +12,8 @@ class TournamentRepository extends BaseRepository {
   async getAll() {
     return await _tournament
       .find()
-      .populate("players", "firstname lastname username");
+      .populate("players", "firstname lastname username")
+      .populate("winner", "firstname lastname username");
   }
 
   async get(tournamentId) {
